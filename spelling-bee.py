@@ -12,7 +12,7 @@ Rules:
 - No proper nouns
 
 Notes:
-- Copy words from /usr/share/dict/words (remove proper names, non-english chars, and apostrophes)
+- Copy words from /usr/share/dict/words (need to remove proper names, non-english chars, and apostrophes as script doesn't check against these)
 - Check if words in dict contain at least one of the provided letters (or easier to check for any other letters)
 - Use a set to store unique words
 - Reduce based on center/key letter and length
