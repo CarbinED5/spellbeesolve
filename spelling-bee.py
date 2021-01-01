@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''
 This program was inspired to solve (for fun) the Spelling Bee mini game found on the NYT crossword app.
 
