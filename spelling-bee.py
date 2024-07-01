@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 '''
 This program was inspired to solve (for fun) the Spelling Bee mini game found on the NYT crossword app.
 
@@ -12,35 +13,31 @@ Rules:
 - No proper nouns
 
 Notes:
-- Copy words from /usr/share/dict/words (need to remove proper names, non-english chars, and apostrophes as script doesn't check against these)
-- Check if words in dict contain at least one of the provided letters (or easier to check for any other letters)
-- Use a set to store unique words
-- Reduce based on center/key letter and length
+- Use words from /usr/share/dict/words (removed proper names, non-english chars, and apostrophes)
 '''
 
 import re
 
 def word_finder(uniq, letters, words):
-    uniq = uniq.lower()
-    letters = letters.lower()
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     anagrams = set()
 
-    not_letters = re.sub(f'[{uniq}{letters}]', '', alphabet)
+    not_letters = re.sub(f'[{uniq.lower()}{letters.lower()}]', '', alphabet)
 
-    with open(words,'r') as wordlist:
-        for word in wordlist:
+    with open(words,'r') as word_list:
+        for word in word_list:
             word = word.strip("\n")
             if uniq in word and len(word) >= 4:
                 if not re.search(rf"[{not_letters}]+", word):
                     anagrams.add(word)
 
-    print(f"Number of words found: {len(anagrams)}")
     return sorted(anagrams)
 
 if __name__ == "__main__":
     uniq = input("Enter the center/required letter (1): ")
     letters = input("Enter the remaining letters as a string (6): ")
     words = "words.txt"
-    print(word_finder(uniq,letters,words))
-    exit(0)
+    anagrams = word_finder(uniq,letters,words)
+
+    print(f"Number of words found: {len(anagrams)}")
+    print("Anagrams: ", anagrams)
